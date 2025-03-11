@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const API_URL = "https://productstore-i787.onrender.com/"
+const API_URL = "https://productstore-i787.onrender.com"
 
 export const useProductionStore = create((set) => ({
   products: [],
