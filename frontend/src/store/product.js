@@ -1,7 +1,5 @@
 import { create } from "zustand";
 
-const API_URL = "https://productstore-i787.onrender.com"
-
 export const useProductionStore = create((set) => ({
   products: [],
   setProducts: (products) => set({products}),
@@ -9,7 +7,7 @@ export const useProductionStore = create((set) => ({
     if(!newProduct.name || !newProduct.price || !newProduct.image){
       return {success: false, message: "Please fill in all field"}
     }
-    const res = await fetch(`${API_URL}/api/products`,{
+    const res = await fetch(`/api/products`,{
       method: "POST",
       headers: {
         "Content-Type":"application/json"
@@ -22,12 +20,12 @@ export const useProductionStore = create((set) => ({
     return {success: true, message: "Product create successfully"}
   },
   fetchProducts: async () => {
-    const res = await fetch(`${API_URL}/api/products`)
+    const res = await fetch(`/api/products`)
     const data = await res.json();
     set({products: data.data});
   },
   deleteProduct: async (pid) => {
-    const res = await fetch(`${API_URL}/api/products/${pid}`, {
+    const res = await fetch(`/api/products/${pid}`, {
       method: 'DELETE',
     });
     const data = await res.json();
@@ -37,7 +35,7 @@ export const useProductionStore = create((set) => ({
     return {success: true, message: data.message};
   },
   updateProduct: async (pid, updatedProduct) => {
-    const res = await fetch(`${API_URL}/api/products/${pid}`,{
+    const res = await fetch(`/api/products/${pid}`,{
       method: 'PUT',
       headers: {
         "Content-Type":"application/json",
